@@ -2,9 +2,7 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
 const CustomModal = ({
-  children,
-  title,
-  header,
+  item,
   show,
   handleSubmit,
   handleOpen,
@@ -13,15 +11,11 @@ const CustomModal = ({
 }) => {
   return (
     <>
-      <Button variant="primary" onClick={handleOpen}>
-        {title}
-      </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{header}</Modal.Title>
+          <Modal.Title>{item.header}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{children}</Modal.Body>
+        <Modal.Body>{item.body}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

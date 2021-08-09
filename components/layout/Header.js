@@ -72,7 +72,7 @@ const Header = () => {
               <Navbar.Toggle aria-controls="navbarSupportedContent" />
 
               <Navbar.Collapse id="navbarSupportedContent" className="offset">
-                <ul className="nav navbar-nav menu_nav ml-auto">
+                <ul className="ml-auto nav navbar-nav menu_nav">
                   <li className="nav-item active">
                     <Link href="/">
                       <a
@@ -95,54 +95,31 @@ const Header = () => {
                     </a>
                     <ul className="dropdown-menu">
                       <li className="nav-item">
-                        <Link href="/shop/category">
-                          <a className="nav-link">Shop Category</a>
+                        <Link href="/shops">
+                          <a className="nav-link">Shops</a>
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link href="/shop/product_details">
-                          <a className="nav-link">Product Details</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link href="/shop/checkout">
+                        <Link href="/shops/checkout">
                           <a className="nav-link">Product Checkout</a>
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link href="/shop/cart">
+                        <Link href="/shops/cart">
                           <a className="nav-link">Shopping Cart</a>
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link href="/shop/comfirmation">
+                        <Link href="/shops/confirmation">
                           <a className="nav-link">Confirmation</a>
                         </Link>
                       </li>
                     </ul>
                   </li>
                   <li className="nav-item submenu dropdown">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Blog
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <Link href="/blog">
-                          <a className="nav-link">Blog</a>
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link href="/blog/id">
-                          <a className="nav-link">Blog Details</a>
-                        </Link>
-                      </li>
-                    </ul>
+                    <Link href="/blogs">
+                      <a className="nav-link">Blogs</a>
+                    </Link>
                   </li>
                   <li className="nav-item submenu dropdown">
                     <a
@@ -152,14 +129,9 @@ const Header = () => {
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      Pages
+                      Extras
                     </a>
                     <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <Link href="/login">
-                          <a className="nav-link">Login</a>
-                        </Link>
-                      </li>
                       <li className="nav-item">
                         <Link href="/extras/tracking">
                           <a className="nav-link">Tracking</a>
@@ -177,10 +149,15 @@ const Header = () => {
                       <a className="nav-link">Contact</a>
                     </Link>
                   </li>
+                  <li className="nav-item login">
+                    <Link href="/login">
+                      <a className="nav-link">Login / Register</a>
+                    </Link>
+                  </li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                   <li className="nav-item">
-                    <Link href="/shop/cart">
+                    <Link href="/shops/cart">
                       <a className="cart">
                         <i
                           className="fa fa-shopping-bag"

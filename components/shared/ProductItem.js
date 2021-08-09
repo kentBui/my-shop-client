@@ -16,7 +16,9 @@ const ProductItem = ({ handelProduct }) => {
         alt=""
       />
       <div className="product-details">
-        <h6>addidas New Hammer sole for Sports person</h6>
+        <Link href={`/shops/product_id`}>
+          <a className="prd_title">addidas New Hammer sole for Sports person</a>
+        </Link>
         <div className="price">
           <h6>$150.00</h6>
           <h6 className="l-through">$210.00</h6>

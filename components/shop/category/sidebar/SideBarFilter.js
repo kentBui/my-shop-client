@@ -27,8 +27,6 @@ const SideBarFilter = () => {
       [e.target.name]: e.target.checked,
     }));
   };
-  console.log("submit", brand);
-  console.log("submit", color);
 
   const onChangeColor = (e) => {
     setColor((oldColor) => ({
