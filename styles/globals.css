@@ -1474,7 +1474,9 @@ img {
 .header_area .navbar .nav .nav-item .nav-link {
   text-transform: uppercase;
   padding: 0px;
-  display: inline-block;
+  height: 100%;
+  display: flex;
+  align-items: center;
   font-size: 12px;
   font-weight: 500;
   color: #222222;
@@ -1571,6 +1573,7 @@ img {
   padding: 10px 4px;
   border-radius: 10px;
 }
+
 .header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {
   background: #ffba00;
   color: #fff;

@@ -5,7 +5,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 
 const HomeBanner = () => {
   const { width, height } = useWindowSize();
-  console.log(width, height);
+  // console.log(width, height);
   return (
     <section className="banner-area">
       <div className="container">

@@ -3,7 +3,7 @@ import Head from "next/head";
 import { ToastContainer } from "react-toastify";
 import Header from "./Header";
 import Footer from "./Footer";
-import Banner from "./Banner";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout = ({ children, title = "My Shop" }) => {
   return (

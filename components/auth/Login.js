@@ -1,8 +1,36 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { signIn } from "next-auth/client";
+import { toast } from "react-toastify";
+import ButtonLoader from "../shared/ButtonLoader";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleSubmitSignin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+    console.log(result);
+
+    if (result.error) {
+      toast.error(result.error);
+      setLoading(false);
+    } else {
+      setLoading(false);
+      window.location.href = "/";
+    }
+  };
   return (
     <section className="login_box_area section_gap">
       <div className="container">
@@ -37,36 +65,46 @@ const Login = () => {
               <form
                 className="row login_form"
                 id="contactForm"
-                noValidate="novalidate"
+                onSubmit={handleSubmitSignin}
               >
                 <div className="col-md-12 form-group">
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
-                    id="name"
-                    name="name"
-                    placeholder="Username"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="col-md-12 form-group">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
-                    id="name"
-                    name="name"
+                    id="password"
+                    name="password"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <div className="col-md-12 form-group">
+                {/* <div className="col-md-12 form-group">
                   <div className="creat_account">
                     <input type="checkbox" id="f-option2" name="selector" />
                     <label htmlFor="f-option2">Keep me logged in</label>
                   </div>
-                </div>
+                </div> */}
                 <div className="col-md-12 form-group">
-                  <button type="submit" value="submit" className="primary-btn">
-                    Log In
+                  <button
+                    type="submit"
+                    value="submit"
+                    disabled={loading ? true : false}
+                    className="btn primary-btn d-flex justify-content-center align-items-center"
+                  >
+                    {loading ? <ButtonLoader /> : <div>Login</div>}
                   </button>
+
                   <Link href="/password/forgot-password">
                     <a>Forgot Password?</a>
                   </Link>

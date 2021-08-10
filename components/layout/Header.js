@@ -2,24 +2,35 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { getProfileActions } from "../../redux/actions/auth.action";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "next-auth/client";
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [headerStyle, setHeaderStyle] = useState({});
 
+  const dispatch = useDispatch();
+
+  const { loading, user } = useSelector((state) => state.user);
+
+  // handle open search
   const openSearch = () => {
     setShowSearch(true);
   };
 
+  // handle close search
   const closeSearch = () => {
     setShowSearch(false);
   };
 
+  // handle search bar
   const handleSubmitSearch = (e) => {
     e.preventDefault();
   };
 
+  // handle nav bar
   useEffect(() => {
     //style={{ width: "100%", position: "fixed", top: "0px" }}
     const addSticky = () => {
@@ -43,6 +54,15 @@ const Header = () => {
       window.removeEventListener("scroll", addSticky);
     };
   });
+
+  useEffect(() => {
+    dispatch(getProfileActions());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSignout = () => {
+    signOut();
+  };
 
   return (
     <div
@@ -75,12 +95,7 @@ const Header = () => {
                 <ul className="ml-auto nav navbar-nav menu_nav">
                   <li className="nav-item active">
                     <Link href="/">
-                      <a
-                        className="nav-link"
-                        href="https://preview.colorlib.com/theme/karma/index.html"
-                      >
-                        Home
-                      </a>
+                      <a className="nav-link">Home</a>
                     </Link>
                   </li>
                   <li className="nav-item submenu dropdown">
@@ -149,11 +164,68 @@ const Header = () => {
                       <a className="nav-link">Contact</a>
                     </Link>
                   </li>
-                  <li className="nav-item login">
-                    <Link href="/login">
-                      <a className="nav-link">Login / Register</a>
-                    </Link>
-                  </li>
+                  {/* load user icon */}
+                  {user ? (
+                    <li className="nav-item submenu dropdown logined">
+                      <a
+                        className="nav-link dropdown-toggle"
+                        data-toggle="dropdown"
+                        role="button"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <Image
+                          src={"/images/home/user.png"}
+                          alt={user && user.name}
+                          width={40}
+                          height={40}
+                          className="rounded-circle"
+                        />
+                        <span>{user && user.name.split(" ")[0]}</span>
+                      </a>
+                      <ul className="dropdown-menu">
+                        {user && user.role === "admin" && (
+                          <>
+                            <li className="nav-item">
+                              <Link href="/products">
+                                <a className="nav-link">Products List</a>
+                              </Link>
+                            </li>
+                            <li className="nav-item">
+                              <Link href="/users">
+                                <a className="nav-link">Users List</a>
+                              </Link>
+                            </li>
+                            <li>
+                              <hr className="dropdown-divider" />
+                            </li>
+                          </>
+                        )}
+
+                        <li className="nav-item">
+                          <Link href="/me/update">
+                            <a className="nav-link">Update</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link href="/">
+                            <a
+                              className="nav-link text-danger"
+                              onClick={handleSignout}
+                            >
+                              Logout
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+                  ) : (
+                    <li className="nav-item login">
+                      <Link href="/login">
+                        <a className="nav-link">Login</a>
+                      </Link>
+                    </li>
+                  )}
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                   <li className="nav-item">

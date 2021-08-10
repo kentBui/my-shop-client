@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/client";
 import React from "react";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
@@ -12,5 +13,22 @@ const RegisterPage = () => {
     </Layout>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession({ req: ctx.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default RegisterPage;
