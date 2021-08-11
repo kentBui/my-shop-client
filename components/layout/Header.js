@@ -196,15 +196,12 @@ const Header = () => {
                                 <a className="nav-link">Users List</a>
                               </Link>
                             </li>
-                            <li>
-                              <hr className="dropdown-divider" />
-                            </li>
                           </>
                         )}
 
                         <li className="nav-item">
                           <Link href="/me/update">
-                            <a className="nav-link">Update</a>
+                            <a className="nav-link">Manager</a>
                           </Link>
                         </li>
                         <li className="nav-item">

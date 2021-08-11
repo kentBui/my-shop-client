@@ -7,8 +7,10 @@ export const dbConnect = () => {
 
   mongoose
     .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       useCreateIndex: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
       useCreateIndex: true,
     })
     .then((_) => console.log("Connect to database"));

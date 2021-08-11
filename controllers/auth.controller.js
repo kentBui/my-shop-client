@@ -89,7 +89,7 @@ export const forgotPassword = catchAsync(async (req, res, next) => {
   // create password reset url
   const resetUrl = `${origin}/password/reset/${resetToken}`;
 
-  const html = `<p>Your password reset url is as follow : \n\n <a href="${origin}/password/reset/${resetToken}">${resetUrl}</a>  \n\n
+  const html = `<p>Your password reset url is as follow : <a href="${origin}/password/reset/${resetToken}">${resetUrl}</a>
   If you have not request this email, then ignore it.</p>`;
 
   try {
@@ -124,7 +124,7 @@ export const resetPassword = catchAsync(async (req, res, next) => {
     resetPasswordExpire: { $gt: Date.now() },
   });
 
-  console.log(req.body.password);
+  // console.log(req.body.password);
 
   if (!user)
     return next(
